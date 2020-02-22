@@ -19,12 +19,27 @@ $(function(){
 	 	task.addClass("col-md-6");
 	 	task.addClass("col-lg-6")
 	 	task.addClass("m-4");
+	 	task.addClass("task");
 	 	task.css("padding", "30px");
 	 	task.append(h1);
 	    tasksDiv.append(task);
 	 	addButton(task, "btn-success", "Completar");
 	 	addButton(task,"btn-danger", "Deletar");
 	 	addButton(task, "btn-info", "Retornar");
+	 	task.mousedown(function(){
+	 		task.bind('mousemove', function(e){
+	 			var x = e.originalEvent.pageX;
+	 			var y = e.originalEvent.pageY;
+	 			var width = $(this).width();
+	 			var height = $(this).height();
+	 			$(this).css("top", (y - (height/2)) + 'px');
+	 			$(this).css("left", (x - (width/2)) + 'px');
+	 		})	
+	 	})
+
+		task.mouseup(function(){
+	 		$(this).unbind("mousemove");
+	 	})
 	 }
 
 	 function addButton(task, btnClass, content){
@@ -39,17 +54,20 @@ $(function(){
 	 		if(content === "Deletar"){
 	 			task.remove();
 	 		}else if(content === "Completar"){
-                task.addClass("bg-success");
-                task.css("color", "white");
-                $(this).hide();
-                task.find("#Retornar").show();
+           		 task.addClass("bg-success");
+           		 task.css("color", "white");
+           		 $(this).hide();
+           		 task.find("#Retornar").show();
 	 		}else if(content === "Retornar"){
-	 			task.removeClass("bg-success");
-	 			task.css("color", "black");
-	 			task.find("#Completar").show();
-	 			$(this).hide();
+	 	    	  task.removeClass("bg-success");
+	 			  task.css("color", "black");
+	 			  task.find("#Completar").show();
+	 			  $(this).hide();
 	 		}
 	 	})
 	 	task.find("#Retornar").hide();
+
+
 	 }
+	 
 })
