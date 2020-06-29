@@ -26,20 +26,7 @@ $(function(){
 	 	addButton(task, "btn-success", "Completar");
 	 	addButton(task,"btn-danger", "Deletar");
 	 	addButton(task, "btn-info", "Retornar");
-	 	task.mousedown(function(){
-	 		task.bind('mousemove', function(e){
-	 			var x = e.originalEvent.pageX;
-	 			var y = e.originalEvent.pageY;
-	 			var width = $(this).width();
-	 			var height = $(this).height();
-	 			$(this).css("top", (y - (height/2)) + 'px');
-	 			$(this).css("left", (x - (width/2)) + 'px');
-	 		})	
-	 	})
-
-		task.mouseup(function(){
-	 		$(this).unbind("mousemove");
-	 	})
+	 	$(".task").draggable();
 	 }
 
 	 function addButton(task, btnClass, content){
